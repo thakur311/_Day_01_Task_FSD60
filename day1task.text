@@ -1,0 +1,218 @@
+Q1. Write a blog on Difference between HTTP1.1 VS HTTP2
+HTTP1.1
+Text-Based Protocol:
+HTTP/1.1 is a text-based protocol where commands and responses are in plain text, making it easy to read and debug.
+
+Single Request per Connection:
+In HTTP/1.1, each TCP connection can handle only one request-response pair at a time. This can lead to inefficiencies,
+ especially for web pages with many resources.
+
+Head-of-Line Blocking:
+Due to its single request per connection model, HTTP/1.1 suffers from head-of-line blocking, where a queued request waits
+ for the preceding one to complete, slowing down the loading process.
+
+Connection Management:
+HTTP/1.1 introduced persistent connections (keep-alive) to allow multiple requests over a single connection, reducing the
+ overhead of establishing multiple connections. However, browsers typically limit the number of concurrent persistent connections 
+ to the same server (e.g., 6 connections).
+
+Chunked Transfer Encoding:
+Supports chunked transfer encoding to allow content to be sent in pieces, useful for dynamically generated content.
+
+Compression:
+Supports gzip compression of HTTP responses to reduce payload size.
+
+HTTP2
+Binary Protocol:
+HTTP/2 uses a binary framing layer instead of text, making it more efficient to parse, more compact, and less error-prone.
+
+Multiplexing:
+Multiple requests and responses can be in flight at the same time over a single TCP connection. This eliminates head-of-line blocking
+ and improves resource loading times.
+
+Header Compression:
+HTTP/2 uses HPACK compression for HTTP headers, reducing overhead and improving performance for repeated headers.
+
+Stream Prioritization:
+Allows clients to prioritize streams (requests and responses), enabling more important resources to load first.
+
+Server Push:
+HTTP/2 can proactively push resources to the client before it even asks for them, improving load times for web pages.
+
+Single Connection:
+A single TCP connection can be used to handle multiple requests and responses concurrently, reducing the overhead of connection management
+ and improving network resource utilization.
+
+Flow Control:
+Includes flow control mechanisms to prevent any one stream from overwhelming the connection, ensuring fair resource usage.
+
+Security:
+While not a requirement, most HTTP/2 implementations use TLS (HTTPS) by default, enhancing security. HTTP/2 does not require encryption,
+ but all major browsers support it only over TLS.
+   
+
+Q2.Write a blog on Object and its internal represtation in javascript
+
+An object in JavaScript is a collection of properties, where each property is a key-value pair. Keys are strings (or symbols), and values can be of any data type, including other objects and 
+functions. Objects are used to store and manipulate data in a structured way.
+Example
+const student = {
+  name: 'chandan',
+  age: 30,
+
+};
+
+console.log(student.name); // Output: chandan
+
+Internal Representation of Objects
+JavaScript engines like V8 (used in Chrome and Node.js) use sophisticated techniques to optimize the performance of objects. 
+Here’s a simplified view of how objects are internally represented:
+
+Property Storage:
+
+.Inline Caches: JavaScript engines use inline caches to speed up property access. When a property is accessed for the first time, 
+the engine records its location. Subsequent accesses can then be optimized using this cached information.
+
+.Hidden Classes: JavaScript engines use hidden classes (also known as shapes or maps) to represent the structure of objects.
+ When an object is created, a hidden class is assigned to it. As properties are added or removed, the engine transitions between 
+ different hidden classes, allowing it to optimize property access.
+
+.Property Descriptors: Objects in JavaScript can have properties with specific attributes (enumerable, configurable, writable). 
+These attributes are stored internally and dictate how properties can be accessed or modified.
+
+Memory Layout:
+
+Inline Properties: For performance reasons, some properties might be stored directly in the object (inline properties), 
+while others might be stored in separate property storage structures.
+
+Hash Tables: For dynamic objects (those with a large or frequently changing number of properties), JavaScript engines might use hash 
+tables to store properties more efficiently.
+
+Q4.Read about IP address, Port, Http Method,and mac address.
+ 
+*** IP address***
+An IP (Internet Protocol) address is a unique identifier assigned to each device connected to a network that uses the Internet Protocol
+ for communication. It serves two primary functions: identifying the host or network interface and providing the location of the host
+ in the network. Let's explore the details of IP addresses, their types, formats, and significance.
+
+Types of IP Addresse
+
+IPv4 Addresses:
+Format: IPv4 addresses are 32-bit numbers, usually represented in decimal format as four octets separated by periods (e.g., 192.168.1.1).
+Range: Each octet can range from 0 to 255.
+Total Addresses: Approximately 4.3 billion unique addresses.
+Example: 192.168.0.1, 8.8.8.8
+
+IPv6 Addresses:
+Format: IPv6 addresses are 128-bit numbers, represented in hexadecimal format and separated by 
+colons (e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334).
+Range: Provides a vastly larger address space compared to IPv4.
+Total Addresses: Approximately 3.4 x 10^38 unique addresses.
+Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+Importance of IP Addresses
+
+Communication: Enable devices to communicate with each other over the internet or a local network.
+Location Identification: Help in identifying the location of devices for routing purposes.
+Network Management: Facilitate network administration, security management, and troubleshooting.
+
+***PORT***
+A port is a logical construct that identifies a specific process or type of network service. It is represented by 
+a 16-bit number, ranging from 0 to 65535, that is used by the Transport Layer protocols (TCP and UDP) to direct traffic to
+ specific applications.
+
+Ports work in conjunction with IP addresses. While an IP address identifies a specific device on a network, a port identifies a 
+specific application or service on that device. For example, when you access a web server, your browser might connect to the server's
+ IP address on port 80 (HTTP) or port 443 (HTTPS).
+
+ 
+Types of Ports
+
+Well-Known Ports (0 to 1023):
+These ports are assigned to widely used and standardized services.
+Examples:
+HTTP: Port 80
+HTTPS: Port 443
+FTP: Port 21
+SSH: Port 22
+SMTP: Port 25
+
+Registered Ports (1024 to 49151):
+These ports are registered by software developers for proprietary applications and are less standardized.
+Examples:
+Microsoft SQL Server: Port 1433
+MySQL: Port 3306
+WebRTC: Port 3478
+
+Dynamic or Private Ports (49152 to 65535):
+These ports are typically used for temporary or private purposes, often for client-side communications.
+Examples:Any application that needs a temporary connection (e.g., a web browser connecting to a server)
+
+**HTTP METHOD***
+Common HTTP Methods
+
+GET
+Purpose: Retrieve data from the server.
+Characteristics: Safe, idempotent, can be cached.
+Example: Fetching a webpage or a list of users.
+
+POST
+Purpose: Submit data to the server to create or update a resource.
+Characteristics: Not idempotent, data sent in request body.
+Example: Submitting a form or creating a new user.
+
+PUT
+Purpose: Update an existing resource or create a new resource if it does not exist.
+Characteristics: Idempotent.
+Example: Updating user information.
+
+DELETE
+Purpose: Delete a specified resource.
+Characteristics: Idempotent.
+Example: Deleting a user account.
+
+PATCH
+Purpose: Apply partial modifications to a resource.
+Characteristics: Not necessarily idempotent.
+Example: Updating a user's email address.
+
+HEAD
+Purpose: Same as GET but without the response body.
+Characteristics: Safe, idempotent.
+Example: Checking if a resource exists or getting metadata.
+
+OPTIONS
+Purpose: Describe the communication options for the target resource.
+Characteristics: Safe, idempotent.
+Example: Checking which HTTP methods are supported by the server.
+
+CONNECT
+Purpose: Establish a tunnel to the server, often used for HTTPS.
+Example: Setting up a proxy connection.
+
+TRACE
+Purpose: Perform a message loop-back test along the path to the target resource.
+Characteristics: Used for debugging.
+Example: Debugging to see what is being received at the other end.
+
+***MAC Address***
+A MAC (Media Access Control) address is a unique identifier assigned to a network interface controller (NIC) for communications on the
+ physical network segment. MAC addresses are used in the data link layer of the OSI model, specifically for network technologies like 
+ Ethernet and Wi-Fi. They are essential for ensuring that data packets are delivered to the correct device within a local network.
+
+Key Characteristics of MAC Addresses
+
+Uniqueness:
+Each MAC address is unique to a specific hardware device, ensuring that no two devices on the same network have the same MAC address.
+
+Format:
+MAC addresses are 48 bits in length, typically represented as six groups of two hexadecimal digits, separated by colons or hyphens.
+Example: 00:1A:2B:3C:4D:5E or 00-1A-2B-3C-4D-5E.
+
+Permanence:
+MAC addresses are usually burned into the hardware by the manufacturer and do not change, although some software allows for MAC address spoofing.
+
+Scope:
+MAC addresses are used for communication within a local area network (LAN) and are not routable beyond the local network.
+
+ 
